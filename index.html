@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="title_bar">
+            <h1>To-do List App</h1>
+        </div>
+        
+        <div class="add_container">
+            <input class="form-control" id="user_input" type="text"> 
+            <button class="btn btn-default" id="add_btn">ADD</button>
+            
+        </div>
+        
+        <div class="todo_container">
+            <h3>TODO</h3>
+            
+            <div class="items_container">
+                <div class="items"><hr>
+                   <div class="col-md-2">
+                       <input type="checkbox" class="checkbox">
+                   </div>
+                   <div class="col-md-6"><span class="main_item">Pay bills</span></div>
+                   <div class="col-md-4"><span class="del">Delete</span></div>                
+                <br>
+                </div>
+                
+                
+            </div>
+            
+            
+        </div>
+            
+        </div>
+    </div>
+    
+    <script src="jquery.min.js"></script>
+    <script>
+        $(function(){
+            
+            
+            $("#add_btn").click(function(){
+                
+                user_input = $("#user_input").val()
+                if(user_input == ''){
+                    alert('Please Enter a Task')
+                    }else{
+                        $(".items_container").append('<div class="items"><hr><div class="col-md-2"><input type="checkbox" class="checkbox"></div><div class="col-md-6"><span class="main_item">'+user_input+'</span></div><div class="col-md-4"><span class="del">Delete</span></div><br></div>')
+                
+                $("#user_input").val('') 
+                    }
+                
+                
+                
+            })
+            
+//if we dont use delegate it wouldnt work because this div is created dynamically
+            $(document).delegate('.del','click',function(){
+                $(this).parent().parent().remove();
+                })
+            
+            $(document).delegate('.checkbox','change',function(){
+                if(this.checked){
+                    $(this).parent().siblings('div').children('.main_item').css('text-decoration','line-through');
+                }else{
+                    $(this).parent().siblings('div').children('.main_item').css('text-decoration','none');
+                }
+                
+                
+            })
+            
+        })
+    </script>
+</body>
+</html>
